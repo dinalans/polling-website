@@ -1,5 +1,15 @@
 document.getElementById('pollForm').addEventListener('submit', function (event) {
     event.preventDefault();
-    let selected = document.querySelector('input[name="poll"]:checked').value;
-    document.getElementById('results').innerText = `You voted for: ${selected}`;
+
+    let username = document.getElementById('username').value;
+    let vote = document.querySelector('input[name="poll"]:checked').value;
+
+    let resultList = document.getElementById('resultList');
+    let listItem = document.createElement('li');
+    listItem.textContent = `${username}: ${vote}`;
+
+    resultList.appendChild(listItem);
+
+    // Clear the form
+    document.getElementById('pollForm').reset();
 });

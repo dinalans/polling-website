@@ -3,20 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Polling Website</title>
+    <title>Polling Page</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Polling Website</h1>
+    <h1>Polling Page</h1>
     <form id="pollForm">
-        <label for="pollQuestion">Your favorite programming language:</label><br>
-        <input type="radio" name="poll" value="JavaScript"> JavaScript<br>
-        <input type="radio" name="poll" value="Python"> Python<br>
-        <input type="radio" name="poll" value="Java"> Java<br>
-        <input type="radio" name="poll" value="C++"> C++<br>
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required><br>
+        <label for="pollChoice">Your vote:</label><br>
+        <input type="radio" name="poll" value="Yes" required> Yes<br>
+        <input type="radio" name="poll" value="No"> No<br>
         <button type="submit">Vote</button>
     </form>
-    <div id="results"></div>
+    <div id="results">
+        <h2>Poll Results</h2>
+        <ul id="resultList"></ul>
+    </div>
     <script src="script.js"></script>
 </body>
 </html>
