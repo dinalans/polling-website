@@ -2,24 +2,24 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Polling Page</title>
+    <title>Polling Website</title>
     <link rel="stylesheet" href="styles.css">
+    <!-- Firebase JS SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database.js"></script>
 </head>
 <body>
-    <h1>Polling Page</h1>
+    <h1>Polling Website</h1>
     <form id="pollForm">
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" required><br>
-        <label for="pollChoice">Your vote:</label><br>
-        <input type="radio" name="poll" value="Yes" required> Yes<br>
-        <input type="radio" name="poll" value="No"> No<br>
-        <button type="submit">Vote</button>
+        <label for="username">Enter your name:</label><br>
+        <input type="text" id="username" required><br><br>
+        <label>Your vote:</label><br>
+        <input type="radio" name="vote" value="Yes" required> Yes<br>
+        <input type="radio" name="vote" value="No"> No<br><br>
+        <button type="submit">Submit Vote</button>
     </form>
-    <div id="results">
-        <h2>Poll Results</h2>
-        <ul id="resultList"></ul>
-    </div>
-    <script src="script.js"></script>
+    <h2>Poll Results</h2>
+    <ul id="results"></ul>
+    <script src="script.js" type="module"></script>
 </body>
 </html>
