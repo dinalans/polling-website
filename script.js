@@ -80,10 +80,11 @@ pollForm.addEventListener('submit', async (e) => {
 
 
 const resultsList = document.getElementById('results');
+let voteIndex = 1;
 onChildAdded(votesRef, (data) => {
     const voteData = data.val();
     const listItem = document.createElement('li');
-    listItem.textContent = `${voteData.username}: ${voteData.vote}`;
+    listItem.textContent = `${voteIndex++}.${voteData.username}: ${voteData.vote}`;
     resultsList.appendChild(listItem);
 });
 

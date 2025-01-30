@@ -108,10 +108,11 @@ document.getElementById('earlyPollForm').addEventListener('submit', async (e) =>
 
 // Display early votes in order received
 const earlyResultsList = document.getElementById('results');
+let voteIndex = 1;
 onChildAdded(earlyVotesRef, (data) => {
     const voteData = data.val();
     const listItem = document.createElement('li');
-    listItem.textContent = `${voteData.username}: ${voteData.vote}`;
+    listItem.textContent = `${voteIndex++}.${voteData.username}: ${voteData.vote}`;
     earlyResultsList.appendChild(listItem);
 });
 
