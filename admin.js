@@ -24,7 +24,7 @@ const adminUsersRef = ref(database, 'adminUsers');
 const settingsRef = ref(database, 'settings/votingEnabled');
 const earlySettingsRef = ref(database, 'settings/earlyVotingEnabled');
 const votesRef = ref(database, 'votes');
-const earlyVotesRef = ref(database, 'earlyVotes');
+//const earlyVotesRef = ref(database, 'earlyVotes');
 
 // Handle login form submission
 document.getElementById('loginForm').addEventListener('submit', function (e) {
@@ -117,16 +117,7 @@ function loadAdminFunctions() {
                 console.error('Error clearing votes:', error);
                 alert('Error clearing votes. Please try again.');
             });
-        remove(earlyVotesRef)
-            .then(() => {
-                alert('All early votes have been cleared.');
-                // Clear the early votes list
-                document.getElementById('earlyVotesList').innerHTML = '';
-            })
-            .catch((error) => {
-                console.error('Error clearing early votes:', error);
-                alert('Error clearing early votes. Please try again.');
-            });
+        
     };
 
     // Fetch initial voting statuses
