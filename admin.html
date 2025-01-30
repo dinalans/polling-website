@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>KMCC</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Add Firebase Auth SDK -->
+    <script src="https://www.gstatic.com/firebasejs/11.2.0/firebase-auth.js"></script>
+</head>
+<body>
+    <h1>Kenmercer Sport Cricket Club</h1>
+    <h2>Admin Panel</h2>
+    <div id="loginDiv">
+        <h3>Login</h3>
+        <form id="loginForm">
+            <label for="email">Email:</label><br>
+            <input type="email" id="email" required><br><br>
+            <label for="password">Password:</label><br>
+            <input type="password" id="password" required><br><br>
+            <button type="submit">Login</button>
+        </form>
+    </div>
+    <div id="adminFunctions" style="display:none;">
+        <button onclick="toggleVoting()">Toggle Voting</button>
+        <p id="votingStatus">Voting is disabled</p>
+        <button onclick="clearVotes()">Clear All Votes</button>
+        <button onclick="logout()">Logout</button>
+    </div>
+    <script src="admin.js" type="module"></script>
+</body>
+</html>
