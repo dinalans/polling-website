@@ -64,17 +64,16 @@ async function checkIfAdmin(uid) {
         } else {
             alert('Access denied: You are not an admin.');
             await signOut(auth);
-            window.location.href = 'admin-login.html'; // Redirect to login page
+            window.location.href = 'admin.html'; // Redirect to the same page
         }
     } catch (error) {
         console.error('Error checking admin status:', error);
         alert('Error checking admin status. Please try again.');
         await signOut(auth);
-        window.location.href = 'admin-login.html'; // Redirect to login page
+        window.location.href = 'admin.html'; // Redirect to the same page
     }
 }
 
-// Load admin functions
 function loadAdminFunctions() {
     // Function to toggle voting
     window.toggleVoting = function () {
@@ -147,13 +146,16 @@ function loadAdminFunctions() {
             .then(() => {
                 document.getElementById('loginDiv').style.display = 'block';
                 document.getElementById('adminFunctions').style.display = 'none';
-                window.location.href = 'admin-login.html'; // Redirect to login page
             })
             .catch((error) => {
                 console.error('Error signing out:', error);
                 alert('Error signing out. Please try again.');
             });
     };
+
+    // Display votes in order received
+  
+    // Display early votes in order received
 
     // Display votes in order received
     const resultsList = document.getElementById('results');
@@ -163,4 +165,4 @@ function loadAdminFunctions() {
         listItem.textContent = `${voteData.username}: ${voteData.vote}`;
         resultsList.appendChild(listItem);
     });
-} // End of loadAdminFunctions
+}
