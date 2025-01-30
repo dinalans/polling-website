@@ -1,14 +1,9 @@
 // Import Firebase modules
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-app.js";
-import {
-    getDatabase,
-    ref,
-    push,
-    set,
-    onChildAdded,
-} from "https://www.gstatic.com/firebasejs/11.2.0/firebase-app.js";
+import { getDatabase, ref, push, set, onChildAdded } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-database.js";
 
-// Your Firebase configuration object
+// Your web app's Firebase configuration
+
 const firebaseConfig = {
     apiKey: "AIzaSyBUb5bbOS8HltAP7YNyGh6skX2AeuNHO5E",
     authDomain: "pollingwebsite-31302.firebaseapp.com",
