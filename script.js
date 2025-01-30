@@ -72,13 +72,14 @@ pollForm.addEventListener('submit', async (e) => {
     } else {
         alert('Please enter your name and select a vote.');
     }
+    // Display votes in order received
+    const resultsList = document.getElementById('results');
+    onChildAdded(votesRef, (data) => {
+        const voteData = data.val();
+        const listItem = document.createElement('li');
+        listItem.textContent = `${voteData.username}: ${voteData.vote}`;
+        resultsList.appendChild(listItem);
+    });
 });
 
-// Display votes in order received
-const resultsList = document.getElementById('results');
-onChildAdded(votesRef, (data) => {
-    const voteData = data.val();
-    const listItem = document.createElement('li');
-    listItem.textContent = `${voteData.username}: ${voteData.vote}`;
-    resultsList.appendChild(listItem);
-});
+
