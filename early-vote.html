@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>KMCC</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Add Firebase Auth SDK -->
+    <script src="https://www.gstatic.com/firebasejs/11.2.0/firebase-auth.js"></script>
+</head>
+<body>
+    <h1>Kenmercer Sport Cricket Club</h1>
+    <h1>Early Voting Page</h1>
+    <div id="earlyLoginDiv">
+        <h2>Login</h2>
+        <form id="earlyLoginForm">
+            <label for="earlyEmail">Email:</label><br>
+            <input type="email" id="earlyEmail" required><br><br>
+            <label for="earlyPassword">Password:</label><br>
+            <input type="password" id="earlyPassword" required><br><br>
+            <button type="submit">Login</button>
+        </form>
+    </div>
+    <div id="earlyVoteDiv" style="display:none;">
+        <p id="earlyVotingStatusMessage"></p>
+        <form id="earlyPollForm" style="display:none;">
+            <label for="earlyUsername">Enter your name:</label><br>
+            <input type="text" id="earlyUsername" required><br><br>
+            <label>Your vote:</label><br>
+            <input type="radio" name="earlyVote" value="Yes" required> Yes<br>
+            <input type="radio" name="earlyVote" value="No"> No<br><br>
+            <button type="submit">Submit Vote</button>
+        </form>
+        <h2>Early Poll Results</h2>
+        <ul id="earlyResults"></ul>
+        <button onclick="earlyLogout()">Logout</button>
+    </div>
+    <script src="early-vote.js" type="module"></script>
+</body>
+</html>
