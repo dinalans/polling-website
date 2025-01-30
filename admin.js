@@ -56,7 +56,7 @@ onAuthStateChanged(auth, user => {
 // Load admin functions
 function loadAdminFunctions() {
     // Function to toggle voting
-    function toggleVoting() {
+    window.toggleVoting = function () {
         onValue(settingsRef, (snapshot) => {
             const votingEnabled = snapshot.val();
             set(settingsRef, !votingEnabled)
@@ -71,7 +71,7 @@ function loadAdminFunctions() {
     }
 
     // Function to clear all votes
-    function clearVotes() {
+    window.clearVotes = function () {
         remove(votesRef)
             .then(() => {
                 alert('All votes have been cleared.');
@@ -89,7 +89,7 @@ function loadAdminFunctions() {
     }, { onlyOnce: true });
 
     // Logout function
-    function logout() {
+    window.logout = function () {
         signOut(auth)
             .then(() => {
                 document.getElementById('loginDiv').style.display = 'block';
@@ -100,9 +100,4 @@ function loadAdminFunctions() {
                 alert('Error signing out. Please try again.');
             });
     }
-
-    // Bind functions to the global scope for button click events
-    window.toggleVoting = toggleVoting;
-    window.clearVotes = clearVotes;
-    window.logout = logout;
 }

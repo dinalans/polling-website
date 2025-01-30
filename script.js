@@ -1,9 +1,8 @@
 // Import Firebase modules
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-app.js";
-import { getDatabase, ref, push, set, onChildAdded } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-database.js";
+import { getDatabase, ref, push, set, onChildAdded, onValue } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-database.js";
 
 // Your web app's Firebase configuration
-
 const firebaseConfig = {
     apiKey: "AIzaSyBUb5bbOS8HltAP7YNyGh6skX2AeuNHO5E",
     authDomain: "pollingwebsite-31302.firebaseapp.com",
@@ -18,11 +17,25 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 const votesRef = ref(database, 'votes');
+const settingsRef = ref(database, 'settings/votingEnabled');
+
+// State to track voting status
+let votingEnabled = false;
+
+// Fetch initial voting status
+onValue(settingsRef, (snapshot) => {
+    votingEnabled = snapshot.val();
+}, { onlyOnce: true });
 
 // Handle form submission
 const pollForm = document.getElementById('pollForm');
 pollForm.addEventListener('submit', (e) => {
     e.preventDefault();
+
+    if (!votingEnabled) {
+        alert("Voting is currently disabled.");
+        return;
+    }
 
     const username = document.getElementById('username').value.trim();
     const vote = document.querySelector('input[name="vote"]:checked').value;
@@ -49,7 +62,6 @@ pollForm.addEventListener('submit', (e) => {
 
 // Display votes in order received
 const resultsList = document.getElementById('results');
-
 onChildAdded(votesRef, (data) => {
     const voteData = data.val();
     const listItem = document.createElement('li');
