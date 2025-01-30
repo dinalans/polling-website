@@ -37,7 +37,7 @@ onValue(settingsRef, (snapshot) => {
         pollForm.style.display = "none";
         pollResults.style.display = "none";
     }
-}, { onlyOnce: true });
+});
 
 // Handle form submission
 const pollForm = document.getElementById('pollForm');
