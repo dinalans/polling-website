@@ -1,8 +1,8 @@
-// Import Firebase modules
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-app.js";
 import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-auth.js";
-import { getDatabase, ref, set, remove, onValue, onChildAdded } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-database.js";
+import { getDatabase, ref, set, remove, onValue, onChildAdded, child, get } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-database.js";
 import { getFunctions, httpsCallable } from 'https://www.gstatic.com/firebasejs/11.2.0/firebase-functions.js';
+
 // Your Firebase configuration object
 const firebaseConfig = {
     apiKey: "AIzaSyBUb5bbOS8HltAP7YNyGh6skX2AeuNHO5E",
@@ -14,12 +14,12 @@ const firebaseConfig = {
     appId: "1:249329617494:web:e5330f7c4460bfdcc689f7"
 };
 
-
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const database = getDatabase(app);
 const adminUsersRef = ref(database, 'adminUsers');
+
 // References to the relevant paths in the database
 const settingsRef = ref(database, 'settings/votingEnabled');
 const earlySettingsRef = ref(database, 'settings/earlyVotingEnabled');
@@ -34,7 +34,7 @@ document.getElementById('loginForm').addEventListener('submit', function (e) {
     signInWithEmailAndPassword(auth, email, password)
         .then(userCredential => {
             // Signed in
-            checkIfAdmin(user.uid);
+            checkIfAdmin(userCredential.user.uid);
         })
         .catch(error => {
             console.error('Error signing in:', error);
@@ -43,10 +43,9 @@ document.getElementById('loginForm').addEventListener('submit', function (e) {
 });
 
 // Check if user is already signed in
-onAuthStateChanged(auth, user => {
+onAuthStateChanged(auth, (user) => {
     if (user) {
         checkIfAdmin(user.uid);
-
     } else {
         document.getElementById('loginDiv').style.display = 'block';
         document.getElementById('adminFunctions').style.display = 'none';
@@ -65,16 +64,15 @@ async function checkIfAdmin(uid) {
         } else {
             alert('Access denied: You are not an admin.');
             await signOut(auth);
-            window.location.href = 'admin.html'; // Redirect to main page
-            document.getElementById('loginDiv').style.display = 'block';
-            document.getElementById('adminFunctions').style.display = 'none';
+            window.location.href = 'admin-login.html'; // Redirect to login page
         }
     } catch (error) {
         console.error('Error checking admin status:', error);
         alert('Error checking admin status. Please try again.');
         await signOut(auth);
-        window.location.href = 'admin.html'; // Redirect to main page
+        window.location.href = 'admin-login.html'; // Redirect to login page
     }
+}
 
 // Load admin functions
 function loadAdminFunctions() {
@@ -149,6 +147,7 @@ function loadAdminFunctions() {
             .then(() => {
                 document.getElementById('loginDiv').style.display = 'block';
                 document.getElementById('adminFunctions').style.display = 'none';
+                window.location.href = 'admin-login.html'; // Redirect to login page
             })
             .catch((error) => {
                 console.error('Error signing out:', error);
