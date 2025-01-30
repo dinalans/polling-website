@@ -1,6 +1,6 @@
 // Import Firebase modules
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-app.js";
-import { getDatabase, ref, push, set, onChildAdded, onValue } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-database.js";
+import { getDatabase, ref, push, set, onChildAdded, onValue, get } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-database.js";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -39,8 +39,12 @@ onValue(settingsRef, (snapshot) => {
 
 // Handle form submission
 const pollForm = document.getElementById('pollForm');
-pollForm.addEventListener('submit', (e) => {
+pollForm.addEventListener('submit', async (e) => {
     e.preventDefault();
+
+    // Re-check the voting status before submitting the vote
+    const snapshot = await get(settingsRef);
+    votingEnabled = snapshot.val();
 
     if (!votingEnabled) {
         alert("Voting is currently disabled.");
