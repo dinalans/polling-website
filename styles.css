@@ -14,20 +14,35 @@ h2 {
     font-size: 24px;
 }
 
+#votingStatusMessage {
+    margin-bottom: 20px;
+}
+
 form {
-    display: inline-block;
-    text-align: left;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     margin-top: 20px;
 }
 
 input[type="text"] {
     width: 200px;
-    padding: 5px;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+label {
+    margin-bottom: 10px;
+}
+
+input[type="radio"] {
+    margin-bottom: 10px;
 }
 
 button {
-    padding: 5px 15px;
+    padding: 10px 20px;
     font-size: 16px;
+    margin-top: 20px;
 }
 
 #results {
