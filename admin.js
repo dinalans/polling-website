@@ -19,7 +19,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const database = getDatabase(app);
-
+const adminUsersRef = ref(database, 'adminUsers');
 // References to the relevant paths in the database
 const settingsRef = ref(database, 'settings/votingEnabled');
 const earlySettingsRef = ref(database, 'settings/earlyVotingEnabled');
@@ -47,14 +47,35 @@ document.getElementById('loginForm').addEventListener('submit', function (e) {
 // Check if user is already signed in
 onAuthStateChanged(auth, user => {
     if (user) {
-        document.getElementById('loginDiv').style.display = 'none';
-        document.getElementById('adminFunctions').style.display = 'block';
-        loadAdminFunctions();
+        checkIfAdmin(user.uid);
+        
     } else {
         document.getElementById('loginDiv').style.display = 'block';
         document.getElementById('adminFunctions').style.display = 'none';
     }
 });
+
+function checkIfAdmin(uid) {
+    adminUsersRef.child(uid).once('value')
+        .then((snapshot) => {
+            if (snapshot.exists()) {
+                // User is an admin
+                document.getElementById('loginDiv').style.display = 'none';
+                document.getElementById('adminFunctions').style.display = 'block';
+                loadAdminFunctions();
+            } else {
+                alert('Access denied: You are not an admin.');
+                auth.signOut();
+                window.location.href = 'index.html'; // Redirect to main page
+            }
+        })
+        .catch((error) => {
+            console.error('Error checking admin status:', error);
+            alert('Error checking admin status. Please try again.');
+            auth.signOut();
+            window.location.href = 'index.html'; // Redirect to main page
+        });
+}
 
 // Load admin functions
 function loadAdminFunctions() {
@@ -136,21 +157,12 @@ function loadAdminFunctions() {
             });
     };
 
-    // Display regular poll results
-    const votesList = document.getElementById('votesList');
+    // Display votes in order received
+    const resultsList = document.getElementById('results');
     onChildAdded(votesRef, (data) => {
         const voteData = data.val();
         const listItem = document.createElement('li');
         listItem.textContent = `${voteData.username}: ${voteData.vote}`;
-        votesList.appendChild(listItem);
-    });
-
-    // Display early poll results
-    const earlyVotesList = document.getElementById('earlyVotesList');
-    onChildAdded(earlyVotesRef, (data) => {
-        const voteData = data.val();
-        const listItem = document.createElement('li');
-        listItem.textContent = `${voteData.username}: ${voteData.vote}`;
-        earlyVotesList.appendChild(listItem);
+        resultsList.appendChild(listItem);
     });
 } // End of loadAdminFunctions
