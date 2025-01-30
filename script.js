@@ -22,9 +22,19 @@ const settingsRef = ref(database, 'settings/votingEnabled');
 // State to track voting status
 let votingEnabled = false;
 
-// Fetch initial voting status
+// Fetch initial voting status and update UI
 onValue(settingsRef, (snapshot) => {
     votingEnabled = snapshot.val();
+    const votingStatusMessage = document.getElementById('votingStatusMessage');
+    const pollForm = document.getElementById('pollForm');
+
+    if (votingEnabled) {
+        votingStatusMessage.textContent = "Voting is enabled. Please cast your vote.";
+        pollForm.style.display = "block";
+    } else {
+        votingStatusMessage.textContent = "Voting is currently disabled.";
+        pollForm.style.display = "none";
+    }
 }, { onlyOnce: true });
 
 // Handle form submission
