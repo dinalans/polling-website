@@ -111,7 +111,7 @@ function loadAdminFunctions() {
             .then(() => {
                 alert('All votes have been cleared.');
                 // Clear the votes list
-                document.getElementById('votesList').innerHTML = '';
+                document.getElementById('results').innerHTML = '';
             })
             .catch((error) => {
                 console.error('Error clearing votes:', error);
