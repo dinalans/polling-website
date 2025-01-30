@@ -54,3 +54,30 @@ onChildAdded(votesRef, (data) => {
     listItem.textContent = `${voteData.username}: ${voteData.vote}`;
     resultsList.appendChild(listItem);
 });
+
+// Handle form submission
+pollForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const username = document.getElementById('username').value.trim();
+    const vote = document.querySelector('input[name="vote"]:checked').value;
+
+    if (username && vote) {
+        const newVoteRef = push(votesRef);
+        set(newVoteRef, {
+            username: username,
+            vote: vote,
+            timestamp: Date.now(),
+        })
+            .then(() => {
+                alert('Your vote has been recorded!');
+                pollForm.reset();
+            })
+            .catch((error) => {
+                console.error('Error saving vote:', error);
+                alert('Error saving vote. Please try again.');
+            });
+    } else {
+        alert('Please enter your name and select a vote.');
+    }
+});
