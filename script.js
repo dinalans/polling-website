@@ -31,9 +31,11 @@ onValue(settingsRef, (snapshot) => {
     if (votingEnabled) {
         votingStatusMessage.textContent = "Voting is enabled. Please cast your vote.";
         pollForm.style.display = "block";
+        pollResults.style.display = "block";
     } else {
         votingStatusMessage.textContent = "Voting is currently disabled.";
         pollForm.style.display = "none";
+        pollResults.style.display = "none";
     }
 }, { onlyOnce: true });
 
@@ -73,13 +75,15 @@ pollForm.addEventListener('submit', async (e) => {
         alert('Please enter your name and select a vote.');
     }
     // Display votes in order received
-    const resultsList = document.getElementById('results');
-    onChildAdded(votesRef, (data) => {
-        const voteData = data.val();
-        const listItem = document.createElement('li');
-        listItem.textContent = `${voteData.username}: ${voteData.vote}`;
-        resultsList.appendChild(listItem);
-    });
+  
 });
 
+
+const resultsList = document.getElementById('results');
+onChildAdded(votesRef, (data) => {
+    const voteData = data.val();
+    const listItem = document.createElement('li');
+    listItem.textContent = `${voteData.username}: ${voteData.vote}`;
+    resultsList.appendChild(listItem);
+});
 
