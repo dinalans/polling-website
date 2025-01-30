@@ -34,9 +34,7 @@ document.getElementById('loginForm').addEventListener('submit', function (e) {
     signInWithEmailAndPassword(auth, email, password)
         .then(userCredential => {
             // Signed in
-            document.getElementById('loginDiv').style.display = 'none';
-            document.getElementById('adminFunctions').style.display = 'block';
-            loadAdminFunctions();
+            checkIfAdmin(user.uid);
         })
         .catch(error => {
             console.error('Error signing in:', error);
