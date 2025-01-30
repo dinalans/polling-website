@@ -68,7 +68,7 @@ onAuthStateChanged(auth, (user) => {
         checkIfAdmin(user.uid);
     } else {
         alert('You must be signed in to access the admin panel.');
-        window.location.href = 'admin-login.html';
+        window.location.href = 'admin.html';
     }
 });
 
@@ -140,7 +140,7 @@ function loadAdminFunctions() {
         try {
             await signOut(auth);
             document.getElementById('adminFunctions').style.display = 'none';
-            window.location.href = 'admin-login.html';
+            window.location.href = 'admin.html';
         } catch (error) {
             console.error('Error signing out:', error);
             alert('Error signing out. Please try again.');
