@@ -1,6 +1,12 @@
 // Import Firebase modules
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
-import { getDatabase, ref, push, onChildAdded } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-database.js";
+import {
+    getDatabase,
+    ref,
+    push,
+    set,
+    onChildAdded,
+} from "https://www.gstatic.com/firebasejs/9.23.0/firebase-database.js"
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
