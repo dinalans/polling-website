@@ -158,11 +158,30 @@ function loadAdminFunctions() {
     // Display early votes in order received
 
     // Display votes in order received
+ 
+
     const resultsList = document.getElementById('results');
-    onChildAdded(votesRef, (data) => {
-        const voteData = data.val();
-        const listItem = document.createElement('li');
-        listItem.textContent = `${voteData.username}: ${voteData.vote}`;
-        resultsList.appendChild(listItem);
+    const displayedChildren = new Set();
+    // Fetch initial votes
+    onValue(votesRef, (snapshot) => {
+        snapshot.forEach(childSnapshot => {
+            const voteData = childSnapshot.val();
+            const listItem = document.createElement('li');
+            listItem.textContent = `${voteData.username}: ${voteData.vote}`;
+            resultsList.appendChild(listItem);
+            displayedChildren.add(childSnapshot.key);
+        });
     });
+
+    // Display new votes
+    onChildAdded(votesRef, (data) => {
+        if (!displayedChildren.has(data.key)) {
+            const voteData = data.val();
+            const listItem = document.createElement('li');
+            listItem.textContent = `${voteData.username}: ${voteData.vote}`;
+            resultsList.appendChild(listItem);
+        }
+    });
+
+
 }
