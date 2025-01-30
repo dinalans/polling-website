@@ -37,8 +37,6 @@ document.getElementById('loginForm').addEventListener('submit', function (e) {
             document.getElementById('loginDiv').style.display = 'none';
             document.getElementById('adminFunctions').style.display = 'block';
             loadAdminFunctions();
-            loadPollResults();
-            loadEarlyPollResults();
         })
         .catch(error => {
             console.error('Error signing in:', error);
@@ -52,8 +50,6 @@ onAuthStateChanged(auth, user => {
         document.getElementById('loginDiv').style.display = 'none';
         document.getElementById('adminFunctions').style.display = 'block';
         loadAdminFunctions();
-        loadPollResults();
-        loadEarlyPollResults();
     } else {
         document.getElementById('loginDiv').style.display = 'block';
         document.getElementById('adminFunctions').style.display = 'none';
@@ -75,7 +71,7 @@ function loadAdminFunctions() {
                     alert('Error toggling voting. Please try again.');
                 });
         }, { onlyOnce: true });
-    }
+    };
 
     // Function to toggle early voting
     window.toggleEarlyVoting = function () {
@@ -90,11 +86,71 @@ function loadAdminFunctions() {
                     alert('Error toggling early voting. Please try again.');
                 });
         }, { onlyOnce: true });
-    }
+    };
 
     // Function to clear all votes
     window.clearVotes = function () {
         remove(votesRef)
             .then(() => {
                 alert('All votes have been cleared.');
+                // Clear the votes list
+                document.getElementById('votesList').innerHTML = '';
             })
+            .catch((error) => {
+                console.error('Error clearing votes:', error);
+                alert('Error clearing votes. Please try again.');
+            });
+        remove(earlyVotesRef)
+            .then(() => {
+                alert('All early votes have been cleared.');
+                // Clear the early votes list
+                document.getElementById('earlyVotesList').innerHTML = '';
+            })
+            .catch((error) => {
+                console.error('Error clearing early votes:', error);
+                alert('Error clearing early votes. Please try again.');
+            });
+    };
+
+    // Fetch initial voting statuses
+    onValue(settingsRef, (snapshot) => {
+        const votingEnabled = snapshot.val();
+        document.getElementById('votingStatus').textContent = votingEnabled ? "Voting is enabled" : "Voting is disabled";
+    });
+
+    onValue(earlySettingsRef, (snapshot) => {
+        const earlyVotingEnabled = snapshot.val();
+        document.getElementById('earlyVotingStatus').textContent = earlyVotingEnabled ? "Early Voting is enabled" : "Early Voting is disabled";
+    });
+
+    // Logout function
+    window.logout = function () {
+        signOut(auth)
+            .then(() => {
+                document.getElementById('loginDiv').style.display = 'block';
+                document.getElementById('adminFunctions').style.display = 'none';
+            })
+            .catch((error) => {
+                console.error('Error signing out:', error);
+                alert('Error signing out. Please try again.');
+            });
+    };
+
+    // Display regular poll results
+    const votesList = document.getElementById('votesList');
+    onChildAdded(votesRef, (data) => {
+        const voteData = data.val();
+        const listItem = document.createElement('li');
+        listItem.textContent = `${voteData.username}: ${voteData.vote}`;
+        votesList.appendChild(listItem);
+    });
+
+    // Display early poll results
+    const earlyVotesList = document.getElementById('earlyVotesList');
+    onChildAdded(earlyVotesRef, (data) => {
+        const voteData = data.val();
+        const listItem = document.createElement('li');
+        listItem.textContent = `${voteData.username}: ${voteData.vote}`;
+        earlyVotesList.appendChild(listItem);
+    });
+} // End of loadAdminFunctions
