@@ -53,27 +53,28 @@ onAuthStateChanged(auth, user => {
     }
 });
 
-function checkIfAdmin(uid) {
-    adminUsersRef.child(uid).once('value')
-        .then((snapshot) => {
-            if (snapshot.exists()) {
-                // User is an admin
-                document.getElementById('loginDiv').style.display = 'none';
-                document.getElementById('adminFunctions').style.display = 'block';
-                loadAdminFunctions();
-            } else {
-                alert('Access denied: You are not an admin.');
-                auth.signOut();
-                window.location.href = 'admin.html'; // Redirect to main page
-            }
-        })
-        .catch((error) => {
-            console.error('Error checking admin status:', error);
-            alert('Error checking admin status. Please try again.');
-            auth.signOut();
+async function checkIfAdmin(uid) {
+    try {
+        // Access child node correctly
+        const snapshot = await get(child(adminUsersRef, uid));
+        if (snapshot.exists()) {
+            // User is an admin
+            document.getElementById('loginDiv').style.display = 'none';
+            document.getElementById('adminFunctions').style.display = 'block';
+            loadAdminFunctions();
+        } else {
+            alert('Access denied: You are not an admin.');
+            await signOut(auth);
             window.location.href = 'admin.html'; // Redirect to main page
-        });
-}
+            document.getElementById('loginDiv').style.display = 'block';
+            document.getElementById('adminFunctions').style.display = 'none';
+        }
+    } catch (error) {
+        console.error('Error checking admin status:', error);
+        alert('Error checking admin status. Please try again.');
+        await signOut(auth);
+        window.location.href = 'admin.html'; // Redirect to main page
+    }
 
 // Load admin functions
 function loadAdminFunctions() {
