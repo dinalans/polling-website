@@ -21,7 +21,7 @@ const database = getDatabase(app);
 
 // References to the relevant paths in the database
 const earlySettingsRef = ref(database, 'settings/earlyVotingEnabled');
-const earlyVotesRef = ref(database, 'earlyVotes');
+const earlyVotesRef = ref(database, 'votes');
 
 // Handle early login form submission
 document.getElementById('earlyLoginForm').addEventListener('submit', function (e) {
@@ -107,7 +107,7 @@ document.getElementById('earlyPollForm').addEventListener('submit', async (e) =>
 });
 
 // Display early votes in order received
-const earlyResultsList = document.getElementById('earlyResults');
+const earlyResultsList = document.getElementById('results');
 onChildAdded(earlyVotesRef, (data) => {
     const voteData = data.val();
     const listItem = document.createElement('li');
