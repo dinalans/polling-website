@@ -68,15 +68,16 @@ button {
   }
   
   /* Optional overlay for better readability */
-  #heroCarousel .carousel-item::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-  }
+ /* Optional overlay for better readability */
+#heroCarousel .carousel-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3); /* Reduced opacity */
+}
   /* Carousel Image */
 .carousel-item img {
     object-fit: cover; /* Ensures the image covers the container */
@@ -116,7 +117,10 @@ button {
     text-align: center;
     padding: 10px;
   }
-  
+    /* Optional overlay for better readability */
+    #heroCarousel .carousel-item::before {
+      background: rgba(0, 0, 0, 0.2); /* Even more reduced opacity for mobile */
+  }
   /* Optional: Style the card */
   #pollSection .card {
     margin-top: 20px;
