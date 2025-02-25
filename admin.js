@@ -1,6 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-app.js";
 import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-auth.js";
-import { getDatabase, ref, set, remove, onValue, onChildAdded, child, get } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-database.js";
+import { getDatabase, ref, set, remove, onValue, onChildAdded, child, get,update } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-database.js";
 import { getFunctions, httpsCallable } from 'https://www.gstatic.com/firebasejs/11.2.0/firebase-functions.js';
 
 // Your Firebase configuration object
@@ -61,6 +61,7 @@ async function checkIfAdmin(uid) {
             document.getElementById('loginDiv').style.display = 'none';
             document.getElementById('adminFunctions').style.display = 'block';
             loadAdminFunctions();
+            setupAdminFunctions();
         } else {
             alert('Access denied: You are not an admin.');
             await signOut(auth);
@@ -71,6 +72,83 @@ async function checkIfAdmin(uid) {
         alert('Error checking admin status. Please try again.');
         await signOut(auth);
         window.location.href = 'admin.html'; // Redirect to the same page
+    }
+}
+
+function setupAdminFunctions() {
+    // Load users when admin panel is opened
+    loadUsers();
+}
+async function loadUsers() {
+    const usersRef = ref(database, 'users');
+    onValue(usersRef, (snapshot) => {
+        const usersData = snapshot.val();
+        if (usersData) {
+            // Use Object.entries to get an array of [uid, userData] pairs
+            const usersArray = Object.entries(usersData);
+            populateUserTable(usersArray);
+        } else {
+            alert('No users found.');
+        }
+    }, (error) => {
+        console.error('Error fetching users:', error);
+        alert('Error fetching users. Please try again.');
+    });
+}
+
+function populateUserTable(usersArray) {
+    const userTableBody = document.querySelector('#userTable tbody');
+    userTableBody.innerHTML = ''; // Clear existing rows
+
+    usersArray.forEach(([uid, user]) => {
+        const tr = document.createElement('tr');
+
+        // UID
+        const uidTd = document.createElement('td');
+        uidTd.textContent = uid;
+        tr.appendChild(uidTd);
+
+        // Email
+        const emailTd = document.createElement('td');
+        emailTd.textContent = user.email || '';
+        tr.appendChild(emailTd);
+
+        // Display Name
+        const nameTd = document.createElement('td');
+        nameTd.textContent = user.username || '';
+        tr.appendChild(nameTd);
+
+        // Early Voting Status
+        const statusTd = document.createElement('td');
+        const isEligible = user.eligibleForEarlyVoting === true;
+        statusTd.textContent = isEligible ? 'Enabled' : 'Disabled';
+        tr.appendChild(statusTd);
+
+        // Toggle Early Voting Button
+        const toggleTd = document.createElement('td');
+        const toggleButton = document.createElement('button');
+        toggleButton.textContent = isEligible ? 'Disable' : 'Enable';
+        toggleButton.addEventListener('click', () => {
+            toggleEarlyVotingStatus(uid, !isEligible, statusTd, toggleButton);
+        });
+        toggleTd.appendChild(toggleButton);
+        tr.appendChild(toggleTd);
+
+        userTableBody.appendChild(tr);
+    });
+}
+
+async function toggleEarlyVotingStatus(uid, enable, statusTd, toggleButton) {
+    try {
+        // Update 'eligibleForEarlyVoting' in the user's data
+        const userRef = ref(database, `users/${uid}`);
+        await update(userRef, { eligibleForEarlyVoting: enable });
+        // Update UI
+        statusTd.textContent = enable ? 'Enabled' : 'Disabled';
+        toggleButton.textContent = enable ? 'Disable' : 'Enable';
+    } catch (error) {
+        console.error('Error updating early voting status:', error);
+        alert('Error updating early voting status. Please try again.');
     }
 }
 
@@ -119,6 +197,9 @@ function loadAdminFunctions() {
             });
         
     };
+
+
+
 
     // Fetch initial voting statuses
     onValue(settingsRef, (snapshot) => {

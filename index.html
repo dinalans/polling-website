@@ -2,26 +2,51 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>KMCC</title>
+    <title>KMCC Polling</title>
     <link rel="stylesheet" href="styles.css">
+    <!-- Firebase Auth SDK -->
+    <script src="https://www.gstatic.com/firebasejs/11.2.0/firebase-auth.js"></script>
 </head>
 <body>
     <h1>Kenmercer Sport Cricket Club</h1>
-    <h2>Availability for This Week's Game </h2>
-    <p id="votingStatusMessage"></p>
-    <form id="pollForm" style="display:none;">
-        <label for="username">Enter your name:</label><br>
-        <input type="text" id="username" required><br><br>
-        <label>Your vote:</label><br>
-        <input type="radio" name="vote" value="Yes" required> Yes<br>
-        <input type="radio" name="vote" value="No"> No<br><br>
-        <button type="submit">Submit Vote</button>
-    </form>
-    <div id="pollResults" style="display:none;">
-        <h2>Poll Results</h2>
-        <ul id="results"></ul>
+    <h2>Availability for This Week's Game</h2>
+
+    <!-- Login Section -->
+    <div id="loginDiv">
+        <h2>Member Login</h2>
+        <form id="loginForm">
+            <label for="email">Email:</label><br>
+            <input type="email" id="email" required><br><br>
+            <label for="password">Password:</label><br>
+            <input type="password" id="password" required><br><br>
+            <button type="submit">Login</button>
+        </form>
+        <p>New member? <a href="signup.html">Sign up here</a></p>
     </div>
-    <!-- Load your script as a module -->
+
+   
+    <!-- Polling Section -->
+    <div id="pollDiv" style="display:none;">
+        <!-- Assuming this is within the pollDiv that shows after login -->
+        <div id="welcomeMessage">
+            <!-- Username will be displayed here -->
+        </div>
+        <!-- Add a link to the profile page -->
+    <p>If your name is not displayed correctly, please update your <a href="profile.html">profile</a>.</p>
+        <p id="votingStatusMessage"></p>
+        
+        <form id="pollForm" style="display:none;">
+            <label>Your vote:</label><br>
+            <input type="radio" name="vote" value="Yes" required> Yes<br>
+            <button type="submit">Submit Vote</button>
+        </form>
+        <div id="pollResults" style="display:none;">
+            <h2>Current Poll Results</h2>
+            <ul id="results"></ul>
+        </div>
+        <button onclick="logout()">Logout</button>
+    </div>
+
     <script src="script.js" type="module"></script>
 </body>
 </html>
