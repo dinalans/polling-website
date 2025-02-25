@@ -150,7 +150,7 @@ async function checkUserEligibilityAndVotingStatus(uid) {
     const votingEnabledSnapshot = await get(votingEnabledRef);
     const votingEnabled = votingEnabledSnapshot.val();
     console.log('Voting enabled:', votingEnabled);
-
+    
     if (votingEnabled || userData.eligibleForEarlyVoting) {
       // Voting is enabled for all users or user is eligible for early voting
       showVotingOptions(userData.eligibleForEarlyVoting);
@@ -195,16 +195,31 @@ function showVotingOptions(isEarlyVoter = false) {
 
 }
 
-// Modify showVotingClosedMessage function
 function showVotingClosedMessage() {
   const votingStatusMessage = document.getElementById('votingStatusMessage');
   const pollForm = document.getElementById('pollForm');
+  const pollResultsDiv = document.getElementById('pollResults');
+  const user = auth.currentUser;
 
   votingStatusMessage.textContent = "Voting is currently closed. Please check back later.";
   pollForm.style.display = "none";
 
- // displayVotes();
+  if (user) {
+    const userId = user.uid;
+    const userRef = ref(database, `users/${userId}`);
+    get(userRef).then((userSnapshot) => {
+      const userData = userSnapshot.val();
+      if (!userData.eligibleForEarlyVoting) {
+        pollResultsDiv.style.display = "none";
+      }
+    }).catch((error) => {
+      console.error('Error fetching user data:', error);
+    });
+  } else {
+    pollResultsDiv.style.display = "none";
+  }
 }
+
 
 function toggleDisplay(isLoggedIn) {
   console.log('toggleDisplay called with isLoggedIn:', isLoggedIn);
