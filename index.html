@@ -20,35 +20,28 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
   <div class="container">
     <a class="navbar-brand" href="#"><h1>KMCC</h1></a>
-    <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"       aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button> -->
-    <!-- Navbar Links -->
- <!--    <div class="collapse navbar-collapse" id="navbarNav"> -->
-      <div class="navbar-nav ml-auto">
+    <div class="navbar-nav ml-auto">
       <ul class="navbar-nav ml-auto">
         <!-- Links when user not logged in -->
         <li class="nav-item" id="signinNavItem">
-          <!-- <a class="nav-link" href="#" data-toggle="modal" data-target="#signinModal">Sign In</a> -->
-          <!-- <button class="btn btn-outline-dark ml-2" id="auth-button" onclick="signinModal()">Sign In</button> -->
-          <a class="btn btn-outline-dark ml-2" href="#" role="button" data-toggle="modal" data-target="#signinModal">Sign In</a>
+          <button class="btn btn-primary" data-toggle="modal" data-target="#signinModal">Sign In</button>
         </li>
-        <!-- <li class="nav-item" id="signupNavItem">
-          <a class="nav-link" href="#" data-toggle="modal" data-target="#signupModal">Sign Up</a>
-        </li> -->
+        <li class="nav-item" id="signupNavItem">
+         <!--  <a class="nav-link" href="#" data-toggle="modal" data-target="#signupModal">Sign Up</a> -->
+        </li>
         <!-- Links when user is logged in -->
-         <!-- User Dropdown when logged in -->
-  <li class="nav-item dropdown d-none" id="userDropdown">
-    <a class="nav-link dropdown-toggle" href="#" id="userDropdownMenu" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      Welcome, <span id="navbarUsername">User</span>
-    </a>
-    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdownMenu">
-      <a class="dropdown-item" href="#" id="updateProfileLink">Update Profile</a>
-      <a class="dropdown-item" href="#" id="passwordResetLink">Reset Password</a>
-      <div class="dropdown-divider"></div>
-      <a class="dropdown-item" href="#" id="logoutLink">Logout</a>
-    </div>
-  </li>
+        <!-- User Dropdown when logged in -->
+        <li class="nav-item dropdown d-none" id="userDropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="userDropdownMenu" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Welcome, <span id="navbarUsername">User</span>
+          </a>
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdownMenu">
+            <a class="dropdown-item" href="#" id="updateProfileLink">Update Profile</a>
+            <a class="dropdown-item" href="#" id="passwordResetLink">Reset Password</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#" id="logoutLink">Logout</a>
+          </div>
+        </li>
       </ul>
     </div>
   </div>
