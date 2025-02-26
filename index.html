@@ -20,19 +20,22 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
   <div class="container">
     <a class="navbar-brand" href="#"><h1>KMCC</h1></a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"       aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"       aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
-    </button>
+    </button> -->
     <!-- Navbar Links -->
-    <div class="collapse navbar-collapse" id="navbarNav">
+ <!--    <div class="collapse navbar-collapse" id="navbarNav"> -->
+      <div class="navbar-nav ml-auto">
       <ul class="navbar-nav ml-auto">
         <!-- Links when user not logged in -->
         <li class="nav-item" id="signinNavItem">
-          <a class="nav-link" href="#" data-toggle="modal" data-target="#signinModal">Sign In</a>
+          <!-- <a class="nav-link" href="#" data-toggle="modal" data-target="#signinModal">Sign In</a> -->
+          <!-- <button class="btn btn-outline-dark ml-2" id="auth-button" onclick="signinModal()">Sign In</button> -->
+          <a class="btn btn-outline-dark ml-2" href="#" role="button" data-toggle="modal" data-target="#signinModal">Sign In</a>
         </li>
-        <li class="nav-item" id="signupNavItem">
+        <!-- <li class="nav-item" id="signupNavItem">
           <a class="nav-link" href="#" data-toggle="modal" data-target="#signupModal">Sign Up</a>
-        </li>
+        </li> -->
         <!-- Links when user is logged in -->
          <!-- User Dropdown when logged in -->
   <li class="nav-item dropdown d-none" id="userDropdown">

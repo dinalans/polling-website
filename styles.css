@@ -9,11 +9,11 @@
 
 
 .modal-dialog {
-  max-width: 90%; /* Increase the modal width */
+  max-width: 50%; /* Increase the modal width */
   margin: 1.8rem auto;
 }
 .modal-content {
-  font-size: 35px; /* Increase font size */
+  font-size: 24px; /* Increase font size */
 }
 /* Position carousel captions */
 #heroCarousel .carousel-caption {
