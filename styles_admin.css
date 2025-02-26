@@ -1,0 +1,41 @@
+﻿body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  margin: 30px;
+}
+
+h1 {
+  color: #4CAF50;
+  font-size: 36px;
+}
+
+h2 {
+  color: #555;
+  font-size: 24px;
+}
+
+form {
+  display: inline-block;
+  text-align: left;
+  margin-top: 20px;
+}
+
+input[type="text"] {
+  width: 200px;
+  padding: 5px;
+}
+
+button {
+  padding: 5px 15px;
+  font-size: 16px;
+}
+
+#results {
+  list-style-type: none;
+  padding: 0;
+}
+
+  #results li {
+      margin: 5px 0;
+      font-size: 18px;
+  }
