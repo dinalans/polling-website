@@ -244,6 +244,12 @@ background: rgba(0, 0, 0, 0.3); /* Reduced opacity */
 #signInPrompt p {
   font-size: 18px; /* Adjusted size for mobile */
 }
-
+.modal-dialog {
+  max-width: 90%; /* Increase the modal width */
+  margin: 1.75rem auto;
+}
+.modal-content {
+  font-size: 18px; /* Increase font size */
+}
 
 }
