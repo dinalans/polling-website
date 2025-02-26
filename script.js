@@ -20,6 +20,7 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const database = getDatabase(app);
 const votingEnabledRef = ref(database, 'settings/votingEnabled');
+const earlyvotingEnabledRef = ref(database, 'settings/earlyVotingEnabled');
 const votesRef = ref(database, 'votes');
 
 // Handle Login Form Submission
@@ -148,11 +149,15 @@ async function checkUserEligibilityAndVotingStatus(uid) {
     displayUserName();
     // Fetch the global voting status
     const votingEnabledSnapshot = await get(votingEnabledRef);
+    const earlyvotingEnabledSnapshot = await get(earlyvotingEnabledRef);
     const votingEnabled = votingEnabledSnapshot.val();
+    const earlyvotingEnabled = earlyvotingEnabledSnapshot.val();
     console.log('Voting enabled:', votingEnabled);
     
-    if (votingEnabled || userData.eligibleForEarlyVoting) {
+    if (votingEnabled ) {
       // Voting is enabled for all users or user is eligible for early voting
+      showVotingOptions(false);
+    } else if (earlyvotingEnabled && userData.eligibleForEarlyVoting) {
       showVotingOptions(userData.eligibleForEarlyVoting);
     } else {
       // Voting is disabled, and user is not eligible for early voting
