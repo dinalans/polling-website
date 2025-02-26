@@ -1,263 +1,249 @@
-﻿body {
-    font-family: Arial, sans-serif;
-    text-align: center;
-    margin: 30px;
-}
-
-h1 {
-    color: #4CAF50;
-    font-size: 36px;
-}
-
-h2 {
-    color: #555;
-    font-size: 24px;
-}
-
-#votingStatusMessage {
-    margin-bottom: 20px;
-}
-
-form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 20px;
-}
-
-input[type="text"] {
-    width: 200px;
-    padding: 10px;
-    margin-bottom: 20px;
-}
-
-label {
-    margin-bottom: 10px;
-}
-
-input[type="radio"] {
-    margin-bottom: 10px;
-}
-
-button {
-    padding: 10px 20px;
-    font-size: 16px;
-    margin-top: 20px;
-}
-
-#results {
-    list-style-type: none;
-    padding: 0;
-}
-
-    #results li {
-        margin: 5px 0;
-        font-size: 18px;
-    }
+﻿
 /* styles.css */
 
 /* Set the height of the carousel items */
 #heroCarousel .carousel-item {
-    height: 70vh;
-    min-height: 400px;
-  }
-  
-  /* Position carousel captions */
-  #heroCarousel .carousel-caption {
-    bottom: 20%;
-  }
-  
-  /* Optional overlay for better readability */
- /* Optional overlay for better readability */
+  height: 70vh;
+  min-height: 400px;
+}
+
+/* Position carousel captions */
+#heroCarousel .carousel-caption {
+  bottom: 20%;
+}
+.nav-item a {
+  font-size: 18px; /* Bigger font size for mobile */
+  font-weight: bold; /* Make text bold */
+  padding: 12px 20px; /* Increase padding */
+}
+
+/* Section Styling */
+#signInPrompt h2 {
+  font-size: 40px; /* Larger heading size */
+  font-weight: bold; /* Make text bold */
+}
+#signInPrompt p {
+  font-size: 24px; /* Larger paragraph size */
+
+}
+
+.navbar-brand h1 {
+  font-size: 35px;
+}
+.nav-link {
+  font-size: 14px;
+}
+/* Optional overlay for better readability */
+/* Optional overlay for better readability */
 #heroCarousel .carousel-item::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
+content: '';
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background: rgba(0, 0, 0, 0.3); /* Reduced opacity */
+}
+/* Carousel Image */
+.carousel-item img {
+  object-fit: cover; /* Ensures the image covers the container */
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.3); /* Reduced opacity */
 }
-  /* Carousel Image */
-.carousel-item img {
-    object-fit: cover; /* Ensures the image covers the container */
-    width: 100%;
-    height: 100%;
-  }
-  /* Adjust image styling */
-  #heroCarousel .carousel-item img {
-    object-fit: cover;
-    width: 100%;
-    height: 100%;
-  }
-  
-  /* styles.css */
+/* Adjust image styling */
+#heroCarousel .carousel-item img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+/* styles.css */
 
 /* Adjust the form-inline elements for better alignment on smaller screens */
 @media (max-width: 576px) {
-    #pollForm .form-inline {
-      flex-direction: column;
-      align-items: center;
-    }
-  
-    #pollForm .btn {
-      margin-left: 0;
-      margin-top: 10px;
-    }
+  #pollForm .form-inline {
+    flex-direction: column;
+    align-items: center;
   }
-  /* Responsive Adjustments for Smaller Screens */
+
+  #pollForm .btn {
+    margin-left: 0;
+    margin-top: 10px;
+  }
+}
+/* Responsive Adjustments for Smaller Screens */
 @media (max-width: 576px) {
-    .carousel-item {
-      height: 60vh; /* Adjust height for smaller screens */
-      min-height: 200px; /* Ensure there's a minimum height */
-    }
+  .carousel-item {
+    height: 60vh; /* Adjust height for smaller screens */
+    min-height: 200px; /* Ensure there's a minimum height */
   }
-  /* Style for the poll results */
-  #pollResults .result-item {
-    text-align: center;
-    padding: 10px;
-  }
-    /* Optional overlay for better readability */
-    #heroCarousel .carousel-item::before {
-      background: rgba(0, 0, 0, 0.2); /* Even more reduced opacity for mobile */
-  }
-  /* Optional: Style the card */
-  #pollSection .card {
-    margin-top: 20px;
-  }
-  
-  /* Adjust the spacing between radio buttons */
-  #pollForm .form-check-inline {
-    margin-right: 20px;
-  }
-  
-  /* Ensure the radio buttons and labels are vertically aligned */
-  #pollForm .form-check-input {
-    margin-top: 0.3rem;
-  }
-  
-  /* Style the result counts */
-  .result-count {
-    font-size: 2rem;
-    font-weight: bold;
-  }
-  
-  /* Style the result labels */
-  .result-label {
-    font-size: 1.2rem;
-  }
-  
-  /* Optional: Add a border or background to the poll results */
-  #pollResults {
-    border-top: 1px solid #ccc;
-    padding-top: 20px;
-  }
+}
+/* Style for the poll results */
+#pollResults .result-item {
+  text-align: center;
+  padding: 10px;
+}
+  /* Optional overlay for better readability */
+  #heroCarousel .carousel-item::before {
+    background: rgba(0, 0, 0, 0.2); /* Even more reduced opacity for mobile */
+}
+/* Optional: Style the card */
+#pollSection .card {
+  margin-top: 20px;
+}
+
+/* Adjust the spacing between radio buttons */
+#pollForm .form-check-inline {
+  margin-right: 20px;
+}
+
+/* Ensure the radio buttons and labels are vertically aligned */
+#pollForm .form-check-input {
+  margin-top: 0.3rem;
+}
+
+/* Style the result counts */
+.result-count {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+/* Style the result labels */
+.result-label {
+  font-size: 1.2rem;
+}
+
+/* Optional: Add a border or background to the poll results */
+#pollResults {
+  border-top: 1px solid #ccc;
+  padding-top: 20px;
+}
 /* styles.css */
 
 /* Style the voter names container */
 #voterNames {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-  
-  #voterNames .voter-item {
-    background-color: #f8f9fa;
-    padding: 10px 15px;
-    border-radius: 20px;
-    margin: 5px;
-    font-size: 1rem;
-    color: #333;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-  }
-  
-  #voterNames .voter-item:hover {
-    background-color: #e2e6ea;
-  }
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+#voterNames .voter-item {
+  background-color: #f8f9fa;
+  padding: 10px 15px;
+  border-radius: 20px;
+  margin: 5px;
+  font-size: 1rem;
+  color: #333;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+#voterNames .voter-item:hover {
+  background-color: #e2e6ea;
+}
 /* styles.css */
 
 /* Style for the total available number */
 #totalYesVotes {
-    color: green; /* Change the text color to green */
-    font-size: 2rem; /* Increase the font size for emphasis */
-    font-weight: bold;
-  }
+  color: green; /* Change the text color to green */
+  font-size: 2rem; /* Increase the font size for emphasis */
+  font-weight: bold;
+}
 /* styles.css */
 
 /* Availability Poll Section Styles */
 #pollSection {
-    background-color: #f0f8ff; /* AliceBlue background for a light, airy feel */
-    padding: 50px 0;
+  background-color: #f0f8ff; /* AliceBlue background for a light, airy feel */
+  padding: 50px 0;
+}
+
+/* Style the card */
+#pollSection .card {
+  border: none;
+  background-color: #e3f2fd; /* Light Blue background */
+  box-shadow: 0 4px 6px rgba(0, 123, 255, 0.1); /* Subtle blue shadow */
+}
+
+/* Card Title */
+#pollSection .card-title {
+  color: #007BFF; /* Bootstrap primary blue */
+  font-weight: bold;
+}
+
+/* Welcome Message */
+#pollSection #welcomeMessageCard {
+  color: #0056b3; /* Darker blue for contrast */
+}
+
+/* Update Profile Link */
+#pollSection a#updateProfileLink {
+  color: #0056b3;
+  text-decoration: underline;
+}
+
+#pollSection a#updateProfileLink:hover {
+  color: #003d80;
+  text-decoration: none;
+}
+
+/* Voting Status Message */
+#pollSection #votingStatusMessage {
+  color: #0069d9;
+  font-size: 1.1rem;
+}
+
+/* Submit Vote Button */
+#pollForm .btn-primary {
+  background-color: #28A745; /* Green color */
+  border-color: #28A745;
+}
+
+#pollForm .btn-primary:hover {
+  background-color: #218838;
+  border-color: #1e7e34;
+}
+
+/* Voter Names Styling */
+#voterNames .voter-item {
+  background-color: #ffffff;
+  border: 1px solid #007BFF;
+  color: #007BFF;
+}
+
+#voterNames .voter-item:hover {
+  background-color: #e3f2fd;
+}
+
+/* Total Available Number Styling */
+#totalYesVotes {
+  color: #28A745; /* Green color to highlight total available number */
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+/* Adjustments for Mobile */
+@media (max-width: 576px) {
+  #pollSection {
+    padding: 30px 0;
   }
-  
-  /* Style the card */
-  #pollSection .card {
-    border: none;
-    background-color: #e3f2fd; /* Light Blue background */
-    box-shadow: 0 4px 6px rgba(0, 123, 255, 0.1); /* Subtle blue shadow */
-  }
-  
-  /* Card Title */
-  #pollSection .card-title {
-    color: #007BFF; /* Bootstrap primary blue */
-    font-weight: bold;
-  }
-  
-  /* Welcome Message */
-  #pollSection #welcomeMessageCard {
-    color: #0056b3; /* Darker blue for contrast */
-  }
-  
-  /* Update Profile Link */
-  #pollSection a#updateProfileLink {
-    color: #0056b3;
-    text-decoration: underline;
-  }
-  
-  #pollSection a#updateProfileLink:hover {
-    color: #003d80;
-    text-decoration: none;
-  }
-  
-  /* Voting Status Message */
-  #pollSection #votingStatusMessage {
-    color: #0069d9;
-    font-size: 1.1rem;
-  }
-  
-  /* Submit Vote Button */
-  #pollForm .btn-primary {
-    background-color: #28A745; /* Green color */
-    border-color: #28A745;
-  }
-  
-  #pollForm .btn-primary:hover {
-    background-color: #218838;
-    border-color: #1e7e34;
-  }
-  
-  /* Voter Names Styling */
-  #voterNames .voter-item {
-    background-color: #ffffff;
-    border: 1px solid #007BFF;
-    color: #007BFF;
-  }
-  
-  #voterNames .voter-item:hover {
-    background-color: #e3f2fd;
-  }
-  
-  /* Total Available Number Styling */
-  #totalYesVotes {
-    color: #28A745; /* Green color to highlight total available number */
-    font-size: 2rem;
-    font-weight: bold;
-  }
-  
-  /* Adjustments for Mobile */
-  @media (max-width: 576px) {
-    #pollSection {
-      padding: 30px 0;
-    }
-  }
-  
+
+  .navbar-brand h1 {
+    font-size: 24px;
+}
+.nav-link {
+    font-size: 14px;
+}
+.nav-item a {
+    font-size: 18px; /* Bigger font size for mobile */
+    font-weight: bold; /* Make text bold */
+    padding: 12px 20px; /* Increase padding */
+}
+
+#signInPrompt h2 {
+  font-size: 36px; /* Adjusted size for mobile */
+}
+#signInPrompt p {
+  font-size: 18px; /* Adjusted size for mobile */
+}
+
+
+}
